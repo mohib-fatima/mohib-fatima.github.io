@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mohib Fatima — AI Researcher</title>
+<meta name="description" content="Mohib Fatima — independent AI researcher studying multilingual LLM deployment, distribution shift, and RL for AI systems.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0B0F14;
+    --surface:#11161D;
+    --surface-2:#161D26;
+    --line:#232C37;
+    --text:#E7ECF2;
+    --muted:#8493A6;
+    --muted-2:#5C6B7D;
+    --calm:#4FD1C5;
+    --alert:#F2A65A;
+    --max:960px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:'IBM Plex Sans', sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    letter-spacing:-0.01em;
+    margin:0;
+  }
+  .mono{
+    font-family:'IBM Plex Mono', monospace;
+  }
+  a{color:inherit;}
+  .wrap{
+    max-width:var(--max);
+    margin:0 auto;
+    padding:0 28px;
+  }
+  section{
+    padding:96px 0;
+    border-bottom:1px solid var(--line);
+  }
+  section:last-of-type{border-bottom:none;}
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:sticky; top:0; z-index:10;
+    background:rgba(11,15,20,0.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    padding-top:16px; padding-bottom:16px;
+  }
+  .nav-name{font-family:'Fraunces', serif; font-size:17px; font-weight:500;}
+  .nav-links{display:flex; gap:28px; font-size:14px; color:var(--muted);}
+  .nav-links a{text-decoration:none; transition:color .15s;}
+  .nav-links a:hover{color:var(--text);}
+
+  /* ---------- HERO ---------- */
+  header.hero{
+    padding:88px 0 64px;
+    border-bottom:1px solid var(--line);
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--alert);
+    margin-bottom:18px;
+  }
+  h1.title{
+    font-size:clamp(34px, 5vw, 52px);
+    line-height:1.08;
+    max-width:16ch;
+  }
+  .subtitle{
+    color:var(--muted);
+    font-size:18px;
+    max-width:52ch;
+    margin-top:22px;
+  }
+  .hero-links{
+    margin-top:32px;
+    display:flex; flex-wrap:wrap; gap:14px;
+  }
+  .pill{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    padding:9px 16px;
+    border:1px solid var(--line);
+    border-radius:99px;
+    color:var(--muted);
+    text-decoration:none;
+    transition:border-color .15s, color .15s;
+  }
+  .pill:hover{border-color:var(--calm); color:var(--text);}
+
+  /* ---------- DRIFT CHART (signature element) ---------- */
+  .chart-block{margin-top:64px;}
+  .chart-caption{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px; color:var(--muted-2);
+    margin-top:14px;
+    max-width:60ch;
+  }
+  .chart-caption b{color:var(--muted);font-weight:500;}
+  svg.drift{width:100%; height:auto; display:block;}
+  .drift-line{
+    fill:none;
+    stroke-width:2;
+    stroke-dasharray:600;
+    stroke-dashoffset:600;
+    animation:draw 2.2s ease-out forwards;
+  }
+  .drift-line.aggregate{stroke:var(--calm); stroke-width:2.5;}
+  .drift-line.locale{stroke:var(--alert); opacity:0.85;}
+  .drift-line.locale.high{stroke:#3E4C5C; opacity:0.6;}
+  .drift-dot{fill:var(--bg); stroke-width:2;}
+  @keyframes draw{to{stroke-dashoffset:0;}}
+  @media (prefers-reduced-motion: reduce){
+    .drift-line{animation:none; stroke-dashoffset:0;}
+  }
+  .drift-label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+  }
+
+  /* ---------- ABOUT ---------- */
+  .about p{
+    font-size:16.5px;
+    color:#C7D0DA;
+    max-width:70ch;
+    margin:0 0 18px;
+  }
+  .about p:last-child{margin-bottom:0;}
+
+  /* ---------- RESEARCH INTERESTS ---------- */
+  .interests-grid{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+    margin-top:36px;
+  }
+  .interest{
+    background:var(--surface);
+    padding:22px 24px;
+    font-size:15px;
+  }
+  .interest .num{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    color:var(--muted-2);
+    display:block;
+    margin-bottom:8px;
+  }
+
+  /* ---------- TAXONOMY ---------- */
+  .tax-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:20px;
+    margin-top:40px;
+  }
+  .tax-card{
+    background:var(--surface);
+    border:1px solid var(--line);
+    padding:26px 24px;
+    border-radius:6px;
+  }
+  .tax-code{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    color:var(--alert);
+    letter-spacing:0.04em;
+  }
+  .tax-name{
+    font-family:'Fraunces', serif;
+    font-size:19px;
+    font-weight:500;
+    margin:10px 0 12px;
+  }
+  .tax-desc{
+    font-size:14.5px;
+    color:var(--muted);
+    line-height:1.55;
+  }
+
+  /* ---------- PUBLICATIONS ---------- */
+  .pub{
+    border:1px solid var(--line);
+    background:var(--surface);
+    border-radius:6px;
+    padding:26px 28px;
+    margin-bottom:16px;
+  }
+  .pub:last-child{margin-bottom:0;}
+  .pub-status{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11.5px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--calm);
+    margin-bottom:10px;
+    display:inline-block;
+  }
+  .pub-status.wip{color:var(--muted-2);}
+  .pub-title{
+    font-family:'Fraunces', serif;
+    font-size:19px;
+    font-weight:500;
+    line-height:1.35;
+    margin-bottom:8px;
+  }
+  .pub-meta{
+    font-size:14px;
+    color:var(--muted);
+  }
+  .pub-links{margin-top:14px; display:flex; gap:16px;}
+  .pub-links a{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    color:var(--calm);
+    text-decoration:none;
+    border-bottom:1px solid transparent;
+  }
+  .pub-links a:hover{border-bottom-color:var(--calm);}
+
+  /* ---------- CONTACT ---------- */
+  .contact-row{
+    display:flex; flex-wrap:wrap; gap:14px;
+    margin-top:28px;
+  }
+  footer{
+    padding:40px 0 60px;
+    text-align:center;
+    color:var(--muted-2);
+    font-size:13px;
+    font-family:'IBM Plex Mono', monospace;
+  }
+
+  @media (max-width:680px){
+    section{padding:64px 0;}
+    .interests-grid{grid-template-columns:1fr;}
+    .tax-grid{grid-template-columns:1fr;}
+    .nav-links{gap:16px; font-size:13px;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="nav-name">Mohib Fatima</div>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#research">Research</a>
+      <a href="#publications">Publications</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Independent Researcher</div>
+    <h1 class="title">AI Researcher &amp; AI Program Leader</h1>
+    <p class="subtitle">Multilingual LLM deployment · distribution shift · reinforcement learning for AI systems</p>
+    <div class="hero-links">
+      <a class="pill" href="#publications">Read the paper →</a>
+      <a class="pill" href="https://orcid.org/0009-0009-4138-7698" target="_blank" rel="noopener">ORCID</a>
+      <a class="pill" href="https://github.com/mohib-fatima" target="_blank" rel="noopener">GitHub</a>
+      <a class="pill" href="mailto:mohib.fatima.edu@gmail.com">Email</a>
+    </div>
+
+    <div class="chart-block">
+      <svg class="drift" viewBox="0 0 800 220" xmlns="http://www.w3.org/2000/svg">
+        <!-- gridlines -->
+        <line x1="0" y1="40" x2="800" y2="40" stroke="#1A222C" stroke-width="1"/>
+        <line x1="0" y1="110" x2="800" y2="110" stroke="#1A222C" stroke-width="1"/>
+        <line x1="0" y1="180" x2="800" y2="180" stroke="#1A222C" stroke-width="1"/>
+
+        <!-- aggregate line: stays calm and roughly flat -->
+        <path class="drift-line aggregate" d="M0,55 C120,50 200,58 320,52 C440,46 560,54 680,50 C740,48 780,52 800,50" style="animation-delay:0s"/>
+
+        <!-- high-resource locale lines: track close to aggregate -->
+        <path class="drift-line locale high" d="M0,60 C120,58 200,64 320,60 C440,58 560,62 680,58 C740,58 780,60 800,58" style="animation-delay:.1s"/>
+        <path class="drift-line locale high" d="M0,65 C120,64 200,68 320,66 C440,64 560,68 680,64 C740,63 780,65 800,64" style="animation-delay:.15s"/>
+
+        <!-- low-resource locale lines: quietly diverge downward -->
+        <path class="drift-line locale" d="M0,62 C140,80 260,110 380,130 C500,148 600,158 800,168" style="animation-delay:.3s"/>
+        <path class="drift-line locale" d="M0,58 C140,90 260,125 380,150 C500,170 600,182 800,192" style="animation-delay:.45s"/>
+
+        <text class="drift-label" x="8" y="34" fill="#4FD1C5">aggregate — steady</text>
+        <text class="drift-label" x="700" y="185" fill="#F2A65A">low-resource locales — quietly degrading</text>
+      </svg>
+      <div class="chart-caption"><b>Illustrative, not real deployment data.</b> This is the shape of the Aggregate Masking Effect (AME): the metric leadership actually watches can look stable while specific locales silently fall behind underneath it.</div>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap">
+    <h2 style="font-size:14px; font-family:'IBM Plex Mono',monospace; text-transform:uppercase; letter-spacing:0.1em; color:var(--muted-2); margin-bottom:28px; font-weight:400;">About</h2>
+    <div class="about">
+      <p>I study how deployed multilingual LLM systems drift from benchmark behavior once real-world feedback loops take over. My current research formalizes this as <b style="color:var(--text)">Feedback-Induced Distribution Shift (FIDS)</b> — three related failure patterns I observed directly while directing AI and data programs at Google across 30+ languages and 100+ product markets — and proposes reinforcement-learning-based adaptation strategies to address them.</p>
+      <p>I'm also developing a second paper on the gap between engagement and accuracy in LLM-mediated search for high-stakes queries.</p>
+      <p>Before moving into research, I spent a decade in AI program leadership at Google and in Microsoft-adjacent roles, and I currently lead product and technology at an AI health-tech startup. My long-term goal is to found a research-driven AI company.</p>
+    </div>
+  </div>
+</section>
+
+<section id="research">
+  <div class="wrap">
+    <h2 style="font-size:14px; font-family:'IBM Plex Mono',monospace; text-transform:uppercase; letter-spacing:0.1em; color:var(--muted-2); margin-bottom:8px; font-weight:400;">Research Interests</h2>
+    <div class="interests-grid">
+      <div class="interest"><span class="num">01</span>Large Language Models &amp; Generative AI</div>
+      <div class="interest"><span class="num">02</span>Robust NLP under Real-World Distribution Shift</div>
+      <div class="interest"><span class="num">03</span>Reinforcement Learning for AI Systems</div>
+      <div class="interest"><span class="num">04</span>Multilingual NLP &amp; Low-Resource Languages</div>
+      <div class="interest"><span class="num">05</span>LLM Evaluation &amp; Deployment Reliability</div>
+      <div class="interest"><span class="num">06</span>AI for Healthcare</div>
+    </div>
+
+    <h2 style="font-size:14px; font-family:'IBM Plex Mono',monospace; text-transform:uppercase; letter-spacing:0.1em; color:var(--muted-2); margin:64px 0 8px; font-weight:400;">The FIDS Taxonomy</h2>
+    <p style="color:var(--muted); max-width:65ch; margin-top:12px;">Three failure patterns that emerge when human feedback loops govern multilingual LLM deployment, formalized with propositions and proofs in the FIDS paper.</p>
+    <div class="tax-grid">
+      <div class="tax-card">
+        <div class="tax-code">AME</div>
+        <div class="tax-name">Aggregate Masking Effect</div>
+        <div class="tax-desc">Quality regressions in specific locales get averaged away by the dashboard-level metric leadership actually watches — the whole looks fine while parts quietly aren't.</div>
+      </div>
+      <div class="tax-card">
+        <div class="tax-code">ADL</div>
+        <div class="tax-name">Aspirational Deferral Lock</div>
+        <div class="tax-desc">Once a metric crosses a "good enough" threshold, the underlying backlog gets deprioritized indefinitely — the target becomes the ceiling.</div>
+      </div>
+      <div class="tax-card">
+        <div class="tax-code">LRLC</div>
+        <div class="tax-name">Low-Resource Locale Collapse</div>
+        <div class="tax-desc">Locales that start behind receive proportionally less correction each cycle, so the gap compounds round over round instead of closing.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="publications">
+  <div class="wrap">
+    <h2 style="font-size:14px; font-family:'IBM Plex Mono',monospace; text-transform:uppercase; letter-spacing:0.1em; color:var(--muted-2); margin-bottom:28px; font-weight:400;">Publications</h2>
+
+    <div class="pub">
+      <span class="pub-status">Preprint · DOI live</span>
+      <div class="pub-title">Feedback-Induced Distribution Shift in Multilingual LLM Deployment: Evidence, Characterization, and RL-Based Adaptation Strategies</div>
+      <div class="pub-meta">Mohib Fatima. Independent Researcher, 2026.</div>
+      <div class="pub-links">
+        <a href="https://doi.org/10.5281/zenodo.21728189" target="_blank" rel="noopener">doi.org/10.5281/zenodo.21728189 →</a>
+        <a href="https://github.com/mohib-fatima/fids-llm-deployment" target="_blank" rel="noopener">Code &amp; source →</a>
+      </div>
+    </div>
+
+    <div class="pub">
+      <span class="pub-status wip">Work in progress</span>
+      <div class="pub-title">Engagement–Accuracy Decoupling in LLM-Mediated Search for High-Stakes Queries</div>
+      <div class="pub-meta">Mohib Fatima. Independent Researcher.</div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" style="border-bottom:none;">
+  <div class="wrap">
+    <h2 style="font-size:14px; font-family:'IBM Plex Mono',monospace; text-transform:uppercase; letter-spacing:0.1em; color:var(--muted-2); margin-bottom:8px; font-weight:400;">Contact</h2>
+    <p style="color:var(--muted); max-width:55ch; margin-top:12px;">Happy to hear from researchers working on related problems, or anyone thinking about deployment-time failure modes in multilingual systems.</p>
+    <div class="contact-row">
+      <a class="pill" href="mailto:mohib.fatima.edu@gmail.com">mohib.fatima.edu@gmail.com</a>
+      <a class="pill" href="https://linkedin.com/in/mohib-fatima" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="pill" href="https://github.com/mohib-fatima" target="_blank" rel="noopener">GitHub</a>
+      <a class="pill" href="https://orcid.org/0009-0009-4138-7698" target="_blank" rel="noopener">ORCID</a>
+      <a class="pill" href="https://scholar.google.com" target="_blank" rel="noopener">Google Scholar</a>
+    </div>
+  </div>
+</section>
+
+<footer>Mohib Fatima — Independent Researcher</footer>
+
+</body>
+</html>
